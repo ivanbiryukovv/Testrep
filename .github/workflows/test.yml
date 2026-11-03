@@ -1,0 +1,22 @@
+name: test
+
+on: workflow_dispatch
+
+jobs:
+ actions-test:
+  runs-on: ubuntu-latest
+  steps:
+  - name: Checkout code
+    uses: actions/checkout@v6
+  - name: Setup .NET 
+    uses: actions/setup-dotnet@v6
+  - name: Push  
+    run: |
+      dotnet new console -n Project -o .src/
+      git config user.email 'ivanbiryukov2021@gmail.com' 
+      git config user.name 'ivanbiryukovv'     
+      git add .
+      git commit -m "Внесены изменения {{github.actor}}"
+      git push 
+    
+ 
